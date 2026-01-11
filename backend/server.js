@@ -14,7 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
     res.send("Le serveur de location de voiture est opérationnel !");
 });
+// Import des routes
+const authRoutes = require('./routes/auth.routes.js');
 
+// Utilisation des routes
+app.use('/api/auth', authRoutes);
 // Port d'écoute
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -21,3 +21,21 @@ db.getConnection((err, connection) => {
 });
 
 module.exports = db.promise();
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root', // Ton utilisateur MySQL
+  password: '',   // Ton mot de passe MySQL
+  database: 'location_voiture'
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Erreur de connexion à la base de données:', err);
+    return;
+  }
+  console.log('Connecté à la base de données MySQL "location_voiture"');
+});
+
+module.exports = connection;
