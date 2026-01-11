@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: white;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e90ff;
+}
+
+.navbar a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #333;
+}
+
+.navbar .btn {
+    background: #1e90ff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+/* ===== HERO ===== */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url("https://images.unsplash.com/photo-1503376780353-7e6692767b70");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* ===== SEARCH BOX ===== */
+.search-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-flex;
+    gap: 10px;
+}
+
+.search-box input,
+.search-box button {
+    padding: 10px;
+}
+
+.search-box button {
+    background: #1e90ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* ===== CARS ===== */
+.cars {
+    padding: 50px;
+    text-align: center;
+}
+
+.car-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.car-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 250px;
+    padding: 15px;
+}
+
+.car-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.car-card h3 {
+    margin: 10px 0;
+}
