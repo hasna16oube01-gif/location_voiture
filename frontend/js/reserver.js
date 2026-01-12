@@ -58,8 +58,22 @@ document.getElementById('reservationForm').addEventListener('submit', async (e) 
         prix_total: parseInt(document.getElementById('totalPrix').innerText)
     };
 
-    // Note: On simulera le paiement ici pour l'instant avant l'envoi au backend
-    alert("Redirection vers le paiement sécurisé...");
-    
-    // Logique d'envoi au backend à implémenter au prochain commit
+    try {
+        const response = await fetch('http://localhost:3000/api/reservations', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reservationData)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Succès ! Votre réservation est confirmée et payée.");
+            window.location.href = 'historique.html';
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        alert("Erreur de connexion au serveur.");
+    }
 });
