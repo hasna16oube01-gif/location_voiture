@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Historique - CarRent</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout" style="display: flex;">
+        <main class="main-content" style="flex: 1; padding: 40px;">
+            <h1>Mon Historique de Location</h1>
+            
+            <div id="historyList" style="margin-top: 30px;">
+                </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const container = document.getElementById('historyList');
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/users/${user.id}/reservations`);
+                const reservations = await response.json();
+
+                if (reservations.length === 0) {
+                    container.innerHTML = "<p>Vous n'avez pas encore de réservations.</p>";
+                    return;
+                }
+
+                container.innerHTML = reservations.map(res => `
+                    <div class="glass-container" style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="color: var(--primary);">${res.marque} ${res.modele}</h3>
+                            <p>Du <b>${new Date(res.date_debut).toLocaleDateString()}</b> au <b>${new Date(res.date_fin).toLocaleDateString()}</b></p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="font-weight: bold;">${res.prix_total}€</p>
+                            <span class="badge" style="background: #2ecc71; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem;">
+                                ${res.statut_paiement}
+                            </span>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                container.innerHTML = "<p>Erreur de chargement.</p>";
+            }
+        });
+    </script>
+</body>
+</html>
