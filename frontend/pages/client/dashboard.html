@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Espace - CarRent</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .dashboard-layout { display: flex; min-height: 100vh; }
+        .sidebar { width: 250px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 30px; border-right: 1px solid var(--glass-border); }
+        .main-content { flex: 1; padding: 40px; }
+        .car-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-top: 30px; }
+        .nav-link { display: block; color: white; text-decoration: none; padding: 15px; border-radius: 10px; margin-bottom: 10px; transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { background: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <h2 class="logo" style="margin-bottom: 40px;">CarRent</h2>
+            <nav>
+                <a href="dashboard.html" class="nav-link active">🚗 Véhicules</a>
+                <a href="historique.html" class="nav-link">📋 Mes Locations</a>
+                <a href="#" id="logoutBtn" class="nav-link" style="margin-top: 50px; color: #ff4d4d;">🚪 Déconnexion</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <h1>Véhicules disponibles</h1>
+                <div id="userInfo" class="glass-container" style="padding: 10px 20px; font-weight: 600;"></div>
+            </header>
+
+            <div class="car-grid" id="carGrid">
+                </div>
+        </main>
+    </div>
+
+    <script src="../../js/dashboard.js"></script>
+</body>
+</html>
