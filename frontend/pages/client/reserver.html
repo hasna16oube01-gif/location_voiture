@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Réserver - CarRent</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; padding: 20px;">
+
+    <div class="glass-container" style="max-width: 600px; width: 100%;">
+        <a href="dashboard.html" style="color: #ddd; text-decoration: none; font-size: 0.9rem;">← Retour aux véhicules</a>
+        
+        <div id="carDetails" style="margin-top: 20px; text-align: center;">
+            <p>Chargement des détails du véhicule...</p>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 25px 0;">
+
+        <form id="reservationForm">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group">
+                    <label>Date de début</label>
+                    <input type="date" id="date_debut" required>
+                </div>
+                <div class="form-group">
+                    <label>Date de fin</label>
+                    <input type="date" id="date_fin" required>
+                </div>
+            </div>
+
+            <div id="priceSummary" class="glass-container" style="background: rgba(255,255,255,0.05); margin: 20px 0; padding: 15px; display: none;">
+                <div style="display: flex; justify-content: space-between;">
+                    <span>Nombre de jours :</span>
+                    <span id="nbJours">0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-weight: bold; margin-top: 10px; font-size: 1.2rem;">
+                    <span>Total à payer :</span>
+                    <span id="totalPrix">0€</span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary" id="confirmBtn" disabled>Confirmer et Payer</button>
+        </form>
+    </div>
+
+    <script src="../../js/reserver.js"></script>
+</body>
+</html>
