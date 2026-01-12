@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Suivi Réservations - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        .table-container { margin-top: 30px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.05); border-radius: 10px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+        th { color: var(--primary); font-weight: 600; }
+        .status-paid { color: #2ecc71; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout" style="display: flex;">
+        <main class="main-content" style="flex: 1; padding: 40px;">
+            <a href="dashboard.html" style="color: #ddd; text-decoration: none;">← Retour Dashboard</a>
+            <h1 style="margin-top: 20px;">Historique global des réservations</h1>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date Commande</th>
+                            <th>Client</th>
+                            <th>Véhicule</th>
+                            <th>Période</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="allReservationsTable">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/admin/reservations');
+                const data = await response.json();
+
+                const tableBody = document.getElementById('allReservationsTable');
+                tableBody.innerHTML = data.map(res => `
+                    <tr>
+                        <td>${new Date(res.date_reservation).toLocaleDateString()}</td>
+                        <td>${res.prenom} ${res.nom}</td>
+                        <td>${res.marque} ${res.modele}</td>
+                        <td>Du ${new Date(res.date_debut).toLocaleDateString()} au ${new Date(res.date_fin).toLocaleDateString()}</td>
+                        <td>${res.prix_total}€</td>
+                        <td class="status-paid">PAYÉE</td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error("Erreur:", error);
+            }
+        });
+    </script>
+</body>
+</html>
