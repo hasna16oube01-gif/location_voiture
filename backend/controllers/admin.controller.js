@@ -29,3 +29,29 @@ exports.getAllReservations = async (req, res) => {
         res.status(500).json({ message: "Erreur serveur" });
     }
 };
+// Récupérer tous les utilisateurs pour la gestion admin
+exports.getAllUsers = async (req, res) => {
+    try {
+        const [rows] = await db.execute(
+            'SELECT id_utilisateur, nom, prenom, email, role FROM utilisateur'
+        );
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: "Erreur lors de la récupération des utilisateurs" });
+    }
+};
+exports.getStats = async (req, res) => {
+    try {
+        const [cars] = await db.execute('SELECT COUNT(*) as total FROM voiture');
+        const [reserves] = await db.execute('SELECT COUNT(*) as total FROM reservation');
+        const [revenue] = await db.execute('SELECT SUM(prix_total) as total FROM reservation WHERE statut = "PAYEE"');
+
+        res.json({
+            totalCars: cars[0].total,
+            totalReservations: reserves[0].total,
+            totalRevenue: revenue[0].total || 0
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Erreur stats" });
+    }
+};
