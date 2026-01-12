@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion Utilisateurs - Admin</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout" style="display: flex;">
+        <main class="main-content" style="flex: 1; padding: 40px;">
+            <a href="dashboard.html" style="color: #ddd; text-decoration: none;">← Retour Dashboard</a>
+            <h1 style="margin-top: 20px;">Gestion des clients</h1>
+
+            <div class="glass-container" style="margin-top: 30px;">
+                <table style="width: 100%; color: white; border-collapse: collapse;">
+                    <thead>
+                        <tr style="text-align: left; border-bottom: 1px solid var(--glass-border);">
+                            <th style="padding: 15px;">Nom / Prénom</th>
+                            <th>Email</th>
+                            <th>Rôle</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        async function loadUsers() {
+            const response = await fetch('http://localhost:3000/api/admin/users');
+            const users = await response.json();
+            const tbody = document.getElementById('userTableBody');
+            
+            tbody.innerHTML = users.map(user => `
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                    <td style="padding: 15px;">${user.nom} ${user.prenom}</td>
+                    <td>${user.email}</td>
+                    <td><span class="badge">${user.role}</span></td>
+                    <td>
+                        <button onclick="toggleUser(${user.id_utilisateur})" class="btn-primary" style="background: #e74c3c; padding: 5px 10px; font-size: 0.8rem;">
+                            Désactiver
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        loadUsers();
+    </script>
+</body>
+</html>
