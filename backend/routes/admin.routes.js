@@ -22,3 +22,18 @@ router.get('/reservations', adminController.getAllReservations);
 router.get('/users', adminController.getAllUsers);
 
 module.exports = router;
+const express = require('express');
+const router = express.Router();
+const adminController = require('../controllers/admin.controller');
+const { verifyToken, isAdmin } = require('../middleware/auth.middleware');
+
+// On applique verifyToken et isAdmin à TOUTES les routes admin ci-dessous
+router.use(verifyToken);
+router.use(isAdmin);
+
+router.post('/vehicles', adminController.addVehicle);
+router.get('/reservations', adminController.getAllReservations);
+router.get('/users', adminController.getAllUsers);
+router.get('/stats', adminController.getStats);
+
+module.exports = router;
